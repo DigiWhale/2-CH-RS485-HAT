@@ -22,8 +22,11 @@ try:
         data_t = ser.read(1000000).decode("utf-8")
         data += str(data_t)
         end = time.perf_counter()
-        if(data):  
-            print(round(len(data)/2.237, 2), "m/s", round(end-start, 2), end='')
+        if(data):
+            speed =  round(len(data)/2.237, 2)
+            time = end - start
+            distance = speed * time
+            print(speed, "m/s", distance, "m")
             data = ''
             
 except KeyboardInterrupt:    
