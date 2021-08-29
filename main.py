@@ -28,5 +28,5 @@ try:
             print(speed, "m/s", distance, "m", data)
             
 except KeyboardInterrupt:    
-    print('  Travelled ', round(total_distance, 4), 'm in ', round(total_time, 4), 's')
+    print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
     exit()
