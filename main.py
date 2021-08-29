@@ -20,9 +20,9 @@ total_time = 0
 try:
     while(1):
         data_t = ser.read(1000000).decode("utf-8")
-        data += str(data_t)
+        data += data_t
         if(1):
-            speed =  round(len(data)/2.237, 2)
+            speed =  len(data)/2.237
             time_interval = 0.01
             distance = speed * time_interval
             total_distance += distance
@@ -31,5 +31,5 @@ try:
             data = ''
             
 except KeyboardInterrupt:    
-    print('  Travelled ', total_distance, 'm in ', total_time, 's')
+    print('  Travelled ', round(total_distance, 4), 'm in ', round(total_time, 4), 's')
     exit()
