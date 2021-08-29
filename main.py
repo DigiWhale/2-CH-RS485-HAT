@@ -18,7 +18,7 @@ data = ''
 
 try:
     while(1):
-        data_t = ser.serial.read(1).decode("utf-8")
+        data_t = ser.read(1).decode("utf-8")
         data += str(data_t)
         if(data):  
             print(len(data))
