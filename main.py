@@ -19,7 +19,7 @@ data = ''
 try:
     while(1):
         start = time.perf_counter()
-        data_t = ser.read().decode("utf-8")
+        data_t = ser.read(1000000).decode("utf-8")
         data += str(data_t)
         end = time.perf_counter()
         if(data):  
