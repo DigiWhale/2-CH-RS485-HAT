@@ -13,7 +13,7 @@ GPIO.setup(TXDEN_1, GPIO.OUT)
 GPIO.setup(TXDEN_2, GPIO.OUT)
 GPIO.output(TXDEN_1, GPIO.HIGH)
 GPIO.output(TXDEN_2, GPIO.HIGH)
-ser = serial.Serial("/dev/ttySC0", 115200, timeout=1)
+ser = serial.Serial("/dev/ttySC0", 115200, timeout=0.1)
 data = ''
 
 try:
@@ -23,7 +23,7 @@ try:
         data += str(data_t)
         end = time.perf_counter()
         if(data):  
-            print(len(data)/100, end-start)
+            print(len(data), end-start)
             data = ''
             
 except KeyboardInterrupt:    
