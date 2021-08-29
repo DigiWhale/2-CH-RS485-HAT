@@ -21,7 +21,7 @@ try:
     while(1):
         data_t = ser.read(1000000).decode("utf-8")
         data += str(data_t)
-        if(data):
+        if(1):
             speed =  round(len(data)/2.237, 2)
             time_interval = 0.01
             distance = speed * time_interval
