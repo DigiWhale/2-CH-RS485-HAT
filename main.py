@@ -23,7 +23,7 @@ try:
         data += str(data_t)
         end = time.perf_counter()
         if(data):  
-            print(len(data), end-start)
+            print(len(data)/2.237, "m/s", end-start)
             data = ''
             
 except KeyboardInterrupt:    
