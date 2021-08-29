@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 import RPi.GPIO as GPIO
-import time
 import serial
 
 TXDEN_1 = 27
@@ -32,5 +31,5 @@ try:
             data = ''
             
 except KeyboardInterrupt:    
-    print(total_distance, "m", 'travelled')
+    print('  Travelled ', total_distance, 'm in ', total_time, 's')
     exit()
