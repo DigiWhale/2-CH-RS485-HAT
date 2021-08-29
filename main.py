@@ -16,6 +16,7 @@ GPIO.output(TXDEN_2, GPIO.HIGH)
 ser = serial.Serial("/dev/ttySC0", 115200, timeout=0.01)
 data = ''
 total_distance = 0
+total_time = 0
 
 try:
     while(1):
@@ -23,9 +24,10 @@ try:
         data += str(data_t)
         if(data):
             speed =  round(len(data)/2.237, 2)
-            total_time = 0.01
-            distance = speed * total_time
+            time_interval = 0.01
+            distance = speed * time_interval
             total_distance += distance
+            total_time += time_interval
             print(speed, "m/s", distance, "m")
             data = ''
             
