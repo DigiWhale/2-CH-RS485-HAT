@@ -19,7 +19,7 @@ time_interval = 0.01
 
 try:
     while(1):
-        data = ser.read(1000000).decode("utf-8")
+        data = ser.read(1000000)
         total_time += time_interval
         if (data):
             speed =  len(data)/2.237
