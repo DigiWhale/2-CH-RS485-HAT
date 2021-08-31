@@ -27,6 +27,7 @@ try:
     p.start()
     while(1):
         print(parent_conn.recv())
+        p.close()
         data = ser.read(1000000)
         total_time += time_interval
         if (data):
