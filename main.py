@@ -22,11 +22,11 @@ total_time = 0
 time_interval = 0.1
 
 try:
-    parent_conn,child_conn = Pipe()
-    p = Process(target=headingfunc, args=(child_conn,))
-    p.start()
-    print(parent_conn.recv())
     while(1):
+        parent_conn,child_conn = Pipe()
+        p = Process(target=headingfunc, args=(child_conn,))
+        p.start()
+        print(parent_conn.recv())
         data = ser.read(1000000)
         total_time += time_interval
         if (data):
