@@ -26,6 +26,7 @@ try:
     p = Process(target=headingfunc, args=(child_conn,))
     p.start()
     print(parent_conn.recv())
+    p.close()
     while(1):
         data = ser.read(1000000)
         total_time += time_interval
