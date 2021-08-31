@@ -3,7 +3,9 @@
 import RPi.GPIO as GPIO
 import serial
 from multiprocessing import Process,Queue,Pipe
-from ..BerryIMU.compass.berryIMU import heading
+import sys
+sys.path.append('../BerryIMU/compass')
+from berryIMU import heading
 
 TXDEN_1 = 27
 TXDEN_2 = 22
