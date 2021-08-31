@@ -26,14 +26,14 @@ try:
         parent_conn,child_conn = Pipe()
         p = Process(target=headingfunc, args=(child_conn,))
         p.start()
-        print(parent_conn.recv())
+        heading = parent_conn.recv()
         data = ser.read(1000000)
         total_time += time_interval
         if (data):
             speed =  (len(data)/10)/2.237
             distance = speed * time_interval
             total_distance += distance
-            print(speed, "m/s", distance, "m")
+            print(speed, "m/s", distance, "m", heading)
             
 except KeyboardInterrupt:    
     print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
