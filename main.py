@@ -25,9 +25,8 @@ try:
     parent_conn,child_conn = Pipe()
     p = Process(target=headingfunc, args=(child_conn,))
     p.start()
-    print(parent_conn.recv())
-    p.close()
     while(1):
+        print(parent_conn.recv())
         data = ser.read(1000000)
         total_time += time_interval
         if (data):
