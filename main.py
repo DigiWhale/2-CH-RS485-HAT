@@ -5,7 +5,7 @@ import serial
 from multiprocessing import Process,Queue,Pipe
 import sys
 sys.path.append('../BerryIMU/compass')
-from berryIMU import heading
+from berryIMU import headingfunc
 
 TXDEN_1 = 27
 TXDEN_2 = 22
@@ -23,7 +23,7 @@ time_interval = 0.1
 
 try:
     parent_conn,child_conn = Pipe()
-    p = Process(target=heading, args=(child_conn,))
+    p = Process(target=headingfunc, args=(child_conn,))
     p.start()
     print(parent_conn.recv())
     while(1):
