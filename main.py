@@ -33,7 +33,7 @@ try:
             speed =  (len(data)/10)/2.237
             distance = speed * time_interval
             total_distance += distance
-            print(speed, "m/s", distance, "m", heading)
+            print(speed, "m/s", distance, "m", round(heading, 2), "degrees")
             
 except KeyboardInterrupt:    
     print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
