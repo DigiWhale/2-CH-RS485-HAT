@@ -2,11 +2,14 @@
 # -*- coding:utf-8 -*-
 import RPi.GPIO as GPIO
 import serial
+import redis
+import json
 # from multiprocessing import Process,Queue,Pipe
 # import sys
 # sys.path.append('../BerryIMU/compass')
 # from berryIMU import headingfunc
-
+r = redis.Redis(host="localhost", port=6379, db=0)
+r.pubsub(ignore_subscribe_messages=True)
 TXDEN_1 = 27
 TXDEN_2 = 22
 GPIO.setmode(GPIO.BCM)
@@ -34,6 +37,10 @@ try:
             distance = speed * time_interval
             total_distance += distance
             print(speed, "m/s", distance, "m")
+            r.publish('doppler', json.dumps({
+            "speed": speed,
+            "distance": distance
+            }))
             
 except KeyboardInterrupt:    
     print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
