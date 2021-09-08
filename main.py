@@ -8,8 +8,8 @@ import json
 # import sys
 # sys.path.append('../BerryIMU/compass')
 # from berryIMU import headingfunc
-r = redis.Redis(host="localhost", port=6379, db=0)
-r.pubsub(ignore_subscribe_messages=True)
+r = redis.Redis(host="192.168.1.4", port=6379, db=0, password='Redis2019!')
+# r.pubsub(ignore_subscribe_messages=True)
 TXDEN_1 = 27
 TXDEN_2 = 22
 GPIO.setmode(GPIO.BCM)
@@ -37,10 +37,11 @@ try:
             distance = speed * time_interval
             total_distance += distance
             print(speed, "m/s", distance, "m")
-            r.publish('doppler', json.dumps({
-            "speed": speed,
-            "distance": distance
-            }))
+            r.hmset('doppler', {"speed": speed, "distance": distance, "total_distance": total_distance, "total_time": total_time})
+            # r.publish('doppler', json.dumps({
+            # "speed": speed,
+            # "distance": distance
+            # }))
             
 except KeyboardInterrupt:    
     print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
