@@ -20,10 +20,10 @@ ser = serial.Serial("/dev/ttySC0", 256000, timeout=0.1)
 total_distance = 0
 total_time = 0
 time_interval = 0.1
+stopped = False
 
 try:
     while(1):
-        stopped = False
         data = ser.read(1000000)
         total_time += time_interval
         if (data):
