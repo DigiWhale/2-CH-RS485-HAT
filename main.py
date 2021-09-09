@@ -6,6 +6,10 @@ import redis
 import json
 from datetime import datetime
 
+def open_file_and_log_data(filename, log_data_event):
+    with open(filename, 'w') as f:
+        f.write(str(log_data_event) + '\n')
+
 r = redis.Redis(host="192.168.1.4", port=6379, db=0, password='Redis2019!')
 TXDEN_1 = 27
 TXDEN_2 = 22
@@ -24,19 +28,22 @@ stopped = False
 
 try:
     while(1):
-        data = ser.read(1000000)
-        total_time += time_interval
-        if (data):
-            stopped = False
-            speed =  (len(data)/10)/2.237
-            distance = speed * time_interval
-            total_distance += distance
-            print(speed, "m/s", distance, "m")
-            r.hmset('doppler', {"speed": speed, "distance": distance, "total_distance": total_distance, "total_time": total_time})
-        elif (stopped == False):
-            stopped = True
-            print("Stopped")
-            r.hmset('doppler', {"speed": 0, "distance": 0, "total_distance": total_distance, "total_time": total_time})
+        try:
+            data = ser.read(1000000)
+            total_time += time_interval
+            if (data):
+                stopped = False
+                speed =  (len(data)/10)/2.237
+                distance = speed * time_interval
+                total_distance += distance
+                print(speed, "m/s", distance, "m")
+                r.hmset('doppler', {"speed": speed, "distance": distance, "total_distance": total_distance, "total_time": total_time})
+            elif (stopped == False):
+                stopped = True
+                print("Stopped")
+                r.hmset('doppler', {"speed": 0, "distance": 0, "total_distance": total_distance, "total_time": total_time})
+        except Exception as e:
+            open_file_and_log_data("/home/pi/Desktop/DMC-error.txt", e)
             
 except KeyboardInterrupt:    
     # print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
