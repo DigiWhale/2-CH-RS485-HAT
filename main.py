@@ -47,4 +47,5 @@ try:
             
 except KeyboardInterrupt:    
     # print('  Travelled', round(total_distance, 4), 'm in', round(total_time, 4), 's')
+    ser.close()
     exit()
